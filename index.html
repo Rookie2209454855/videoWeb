@@ -1,0 +1,111 @@
+<html>
+<meta charset="utf-8" />
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap-select.min.js"></script>
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<script src="js/bootstrap.min.js"></script>
+<script src="js/jquery.tmpl.min.js"></script>
+<script src="js/bootstrap-paginator.js"></script>
+<head>
+    <title>欢迎访问视频服务</title>
+</head>
+<body>
+	 <div  class="container" >
+        <h1  class="text-center">welcome</h1>
+
+        <div>
+            <div class="input-group">
+                <span class="input-group-addon" >筛选:</span>
+                <select class="form-control" id="disks" ></select>
+                <span  class="input-group-addon btn btn-default" id="scanning">确定</span>
+            </div>
+        </div>
+
+
+        <div class="input-group">
+            <span class="input-group-addon">搜索</span>
+            <input type="text" id="videoQuery" class="form-control" placeholder="请输入视频名称!">
+        </div>
+    </div>
+
+    <div>
+
+        <ul class="nav nav-pills text-center">
+            <li class="active" onclick="addActive(this);"><a href="#">视频</a></li>
+            <li onclick="addActive(this);"><a href="showimg.html">图片</a></li>
+            <li onclick="addActive(this);"><a href="downloadFile.html">下载</a></li>
+        </ul>
+
+        <table class="table table-bordered table-hover table-condensed table-striped text-center" id="j-table-1">
+            <thead>
+            <tr>
+                <th>视频名称</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody id="videLink">
+            </tbody>
+        </table>
+
+
+       <div id="fenye"></div>
+
+
+
+    </div>
+
+    <!-- 视频下载模态框（Modal） -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">
+
+                    </h4>
+                </div>
+                <div class="modal-body" id="links">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                    </button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+    </div>
+
+<script id="videLinkTemplate" type="text/x-jquery-tmpl">
+{{each(i,item) links}}
+    <tr>
+        <td>
+            <a href="video.html?id={{= item.id}}" >
+            <span class="text-center">{{= item.name}}</span>
+            </a>
+        </td>
+ 		<td>
+           <button type="button" class="btn btn-info btn-xs j-set" onclick="dowloadVideo({{= item.id}});" data-toggle="modal" data-target="#myModal">下载</button>
+		   <button type="button" class="btn btn-info btn-xs j-set" onclick="delVideo(this);" value="{{= item.id}}">删除</button>
+        </td>
+    </tr>
+{{/each}}
+</script>
+<script id="disksTemplate" type="text/x-jquery-tmpl">
+<option value="0">请选择</option>
+{{each(i,disk) _disks}}
+    <option value="{{= disk.diskLable}}">{{= disk.diskName}}</option>
+{{/each}}
+</script>
+<script type="text/javascript">
+        function addActive(actv) {
+            console.log(actv);
+            $(".active").removeAttr("class");
+            actv.setAttribute("class","active");
+        }
+</script>
+<script  charset="utf-8"  src="js/utils.js"></script>
+<script src="js/index.js"></script>
+</body>
+</html>

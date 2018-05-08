@@ -1,0 +1,84 @@
+<html>
+<meta charset="utf-8" />
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap-select.min.js"></script>
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<script src="js/bootstrap.min.js"></script>
+<script src="js/jquery.tmpl.min.js"></script>
+<script src="js/bootstrap-paginator.js"></script>
+<head>
+    <title>欢迎访问视频服务</title>
+</head>
+<body>
+	 <div  class="container" >
+        <h1  class="text-center">欢迎使用下载服务</h1>
+
+       <!-- <div>
+            <div class="input-group">
+                <span class="input-group-addon" >筛选:</span>
+                <select class="form-control" id="disks" ></select>
+                <span  class="input-group-addon btn btn-default" id="scanning">确定</span>
+            </div>
+        </div>-->
+
+
+       <!-- <div class="input-group">
+            <span class="input-group-addon">搜索</span>
+            <input type="text" id="videoQuery" class="form-control" placeholder="请输入视频名称!">
+        </div>-->
+    </div>
+
+    <div>
+
+        <ul class="nav nav-pills text-center">
+            <li  onclick="addActive(this);"><a href="#">视频</a></li>
+            <li onclick="addActive(this);"><a href="showimg.html">图片</a></li>
+            <li onclick="addActive(this);" class="active"><a href="#">下载</a></li>
+        </ul>
+
+		<div>
+	        <form class="form-horizontal" role="form" id="fm" method="post">
+			  <div class="form-group">
+			    <label for="firstname" class="col-sm-1 control-label">下载链接</label>
+			    <div class="col-sm-9">
+			      <input type="text" class="form-control" id="uri" name="uri" placeholder="请输入链接">
+			    </div>
+			  </div>
+			  <div class="form-group">
+			    <label for="lastname" class="col-sm-1 control-label">保存位置</label>
+			    <div class="col-sm-9">
+			      <input type="text" class="form-control" id="project" name="project" placeholder="请输入保存位置">
+			    </div>
+			  </div>
+			   <div class="form-group">
+			    <label for="lastname" class="col-sm-1 control-label">文件名</label>
+			    <div class="col-sm-9">
+			      <input type="text" class="form-control" id="filename" name="filename" placeholder="请输入文件名">
+			    </div>
+			  </div>
+			  <div class="form-group">
+			    <label for="lastname" class="col-sm-1 control-label">保存盘符</label>
+			    <div class="col-sm-9">
+			      <select class="form-control" name="disk"   id="disk" ></select>
+			    </div>
+			  </div>
+			  <div class="form-group">
+			    <div class="col-sm-offset-2 col-sm-10">
+			      <button type="button" id="download" class="btn btn-default">提交</button>
+			    </div>
+			   
+			  </div>
+			</form>
+		</div>
+    </div>
+
+<script id="disksTemplate" type="text/x-jquery-tmpl">
+<option value="0">请选择</option>
+{{each(i,disk) _disks}}
+    <option value="{{= disk.diskLable}}">{{= disk.diskName}}</option>
+{{/each}}
+</script>
+<script  charset="utf-8"  src="js/utils.js"></script>
+<script src="js/download.js"></script>
+</body>
+</html>
