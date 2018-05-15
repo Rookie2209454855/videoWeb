@@ -3,6 +3,8 @@
  */
 var _callback;
 var _param;
+var pageNo=1;
+var pageSize=20;
 function fenye(ele,data,callback) {
     layui.use('laypage', function(){
         var laypage = layui.laypage;
@@ -35,14 +37,16 @@ function showalert(msg) {
     layui.use('layer', function() {
         var layer = layui.layer;
         layer.open({
-            title: '在线调试'
-            ,content: '可以填写任意的layer代码'
+            title: '提示信息'
+            ,content: msg
         });
     })
 }
 
 function reapi(){
-	return "http://192.168.137.1:8080/ssm"
+	var test="http://127.0.0.1:8080/ssm";
+	var zhengshi="http://192.168.137.1:8080/ssm";
+	return test
 }
 
 

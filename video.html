@@ -4,15 +4,25 @@
     <meta charset="utf-8">
     <title>播放器</title>
     <link href="css/video-js.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
     <style>
-        body{background-color: #191919}
+        /*body{background-color: #191919}*/
         .m{ width: 740px; height: 400px; margin-left: auto; margin-right: auto; margin-top: 100px; }
     </style>
     <script src="js/jquery.min.js"></script>
-    
-    
 </head>
 <body onmousewheel="return false;">
+<div class="page-header" >
+  <h1 id="vtitle" align="center"></h1>
+  
+  <ol class="breadcrumb">
+    <li><a href="index.html">Home</a></li>
+    <li ><span id="vpage"></span></li>
+    
+   </ol>
+
+</div>
+
 
 <div class="m">
     <video id="audio_id" class="video-js" controls preload="auto" width="740" height="400"
@@ -23,19 +33,57 @@
         </p>
     </video>
 </div>
-<script   src="js/utils.js"></script>
-<script src="js/video.js"></script>
-<!--<script src="js/video.min.js"></script>
-    <script type="text/javascript">
-        //获取播放控件
-        var myPlayer = videojs('audio_id');
-        myPlayer.ready(function(){
-            var myPlayer = this;
-            myPlayer.play();
+
+<script src="js/utils.js"></script>
+
+<script src="js/video.min.js"></script>
+<script type="text/javascript">
+	
+	var vid=window.location.href.split("=")[1];
+	console.log(vid)
+	var uri;
+	$.ajax({
+			type:'GET',
+			data:{"id":vid},
+			url:reapi()+"/showVideo",
+			success:function(data){
+				/*console.log(data);*/
+				uri='http://'+data.uri;
+				/*console.log(uri);*/
+				var vname=data.videoName;
+				$("#vtitle").text(vname.substring(0,vname.indexOf(".")))
+				$("#vpage").text(vname.substring(0,vname.indexOf(".")))
+			},
+			error:function(){
+				alert("加载视频列表失败");
+			}
+	})
+	
+	 var myPlayer=videojs('audio_id');
+	 myPlayer.ready(function(){
+	 		myPlayer.src(uri);
+           /* myPlayer.play();*/
+            
+            
+            /*结束后直接播放下一部*/
             myPlayer.on("ended", function(){
-                console.log("end", this.currentTime());
+            	$.ajax({
+					type:'GET',
+					data:{"id":vid},
+					url:reapi()+"/showNextVideo",
+					success:function(data){
+						console.log(data);
+						window.location.href="video.html?id="+data.id;
+					},
+					error:function(){
+						alert("加载视频列表失败");
+					}
+				})
+            	 myPlayer.src(uri);
+				 myPlayer.play();
             });
-        });
-    </script>-->
+            
+       });
+</script>
 </body>
 </html>

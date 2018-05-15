@@ -1,5 +1,4 @@
-var pageNo=1;
-var pageSize=20;
+
 $(document).ready(function(){
 	showDisk();
 	showLink();
@@ -117,42 +116,7 @@ $(document).ready(function(){
 			}
 		})
 	});
-
-	//分页事件
-	function pageing(count){
-		console.log(count);
-		if(count<=pageSize) {
-			$(".pagination").hide();
-			return false;
-		}else{
-			var pageIndex=count % pageSize == 0 ? count / pageSize : count / pageSize + 1;
-			$(".pagination").show();
-			$(".pagination").bootstrapPaginator({
-				bootstrapMajorVersion: 3.0,
-				currentPage: pageNo,
-				totalPages: pageIndex,
-				numberOfPages: pageSize,
-				itemTexts: function (type, page, currentPage) {
-					switch (type) {
-						case "first": return "首页";
-						case "prev" : return "上一页";
-						case "next" : return "下一页";
-						case "last" : return "尾页";
-						case "page" : return page;
-					}
-				},onPageClicked: function(event, originalEvent, type, page){
-					if(pageNo == page){
-						return false;
-					}
-					pageNo = page;
-					showLink();
-				}
-			});
-		}
-	};
-
-
-
+	
 
 })
 
